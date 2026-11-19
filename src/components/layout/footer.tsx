@@ -129,6 +129,18 @@ export function Footer() {
           <p>
             © {siteConfig.copyrightYear} {siteConfig.brand.name}. All rights reserved.
           </p>
+          <p>
+            Designed &amp; developed by{" "}
+            <a
+              href="https://ahmadnaeem.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-accent-2 hover:text-fg font-semibold underline-offset-4 transition-colors hover:underline"
+            >
+              Ahmd
+              <span className="sr-only"> (opens in a new tab)</span>
+            </a>
+          </p>
           <Link href="/privacy-policy" className="hover:text-fg inline-flex min-h-10 items-center gap-1">
             Privacy Policy <ArrowUpRight className="size-3" aria-hidden />
           </Link>
