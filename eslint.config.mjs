@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Third-party AI skill files (UI UX Pro Max)
+    ".claude/**",
+    "design-system/**",
   ]),
 ]);
 
