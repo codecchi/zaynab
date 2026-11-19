@@ -2,70 +2,244 @@
 @import "lenis/dist/lenis.css";
 
 /*
- * Design tokens — Premium Tax Consultancy
- * Navy is the primary brand colour; champagne gold is a restrained accent.
- * Gold (#C6A66B) is only used for TEXT on navy (7.4:1). On light backgrounds,
- * text uses gold-deep (#8A6A35, 4.6:1); plain gold there is decorative only.
+ * Design tokens — "ReGrowth"
+ * Palette: #1B2922 deep forest · #1C1C1C charcoal · #435146 grey-green · #4A6958 sage.
+ * Readable tints derived from sage: #A8CDB0 mint · #C7E3CC pale mint · #8DB596 leaf.
+ *
+ * Dark-first. Sections with `.theme-deep` switch to a charcoal → forest gradient
+ * (like the palette's backdrop) for rhythm; components adapt automatically.
+ *
+ * Readability (WCAG) on #1B2922: fg 13.4:1, muted 8.5:1, subtle 6.4:1, mint 8.7:1.
+ * On #1C1C1C: fg 15:1, muted 9.6:1, subtle 7.2:1.
+ * Sage #4A6958 and grey-green #435146 are too dark for text here (<2.5:1) —
+ * they are used for glows, surfaces and gradients only.
  */
 :root {
-  --navy: #101c2c;
-  --midnight: #172a40;
-  --gold: #c6a66b;
-  --gold-deep: #8a6a35;
-  --gold-soft: #e9dcc2;
-  --ivory: #f7f6f2;
-  --white: #ffffff;
-  --slate: #5f6a7c; /* body-muted on light (darkened from #687386 for 4.5:1 contrast) */
-  --slate-light: #9aa3b2; /* muted text on navy */
-  --line: #e7e7e3;
-  --ink: #101c2c;
+  --bg: #1b2922;
+  --surface: #22332b;
+  --surface-2: #2a3d33;
+  --accent: #a8cdb0;
+  --accent-2: #c7e3cc;
+  --on-accent: #13201a;
+  --highlight: #8db596;
+  --fg: #eef2ee;
+  --muted: #b8c6bc;
+  --subtle: #9aad9f;
+  --line: rgb(199 227 204 / 0.1);
+  --line-strong: rgb(199 227 204 / 0.18);
+
+  /* effects */
+  --glass-from: rgb(238 242 238 / 0.06);
+  --glass-to: rgb(238 242 238 / 0.02);
+  --glass-shadow: 0 1px 0 0 rgb(238 242 238 / 0.07) inset, 0 30px 60px -32px rgb(0 0 0 / 0.6);
+  --grid-line: rgb(199 227 204 / 0.05);
+  --glow-1: #4a6958; /* sage */
+  --glow-2: #435146; /* grey-green */
+  --glow-3: #6e8b6a; /* leaf light */
+  --ag-1: #ffffff; /* accent gradient text: white → pale mint → leaf */
+  --ag-2: #c7e3cc;
+  --ag-3: #8db596;
+  --btn-from: #d3eadb;
+  --btn-to: #8db596;
+  --btn-shadow:
+    0 0 0 1px rgb(199 227 204 / 0.35), 0 12px 30px -12px rgb(141 181 150 / 0.55), inset 0 1px 0 rgb(255 255 255 / 0.55);
+  --btn-shadow-hover:
+    0 0 0 1px rgb(199 227 204 / 0.55), 0 18px 44px -10px rgb(141 181 150 / 0.7), inset 0 1px 0 rgb(255 255 255 / 0.65);
+}
+
+/* Deep bands: charcoal → forest gradient, same readable tints. */
+.theme-deep {
+  --bg: #1c1c1c;
+  --surface: #232825;
+  --surface-2: #2b322d;
+  --glow-1: #4a6958;
+  --glow-2: #435146;
+  --glow-3: #2f4a3b;
+
+  background-color: var(--bg);
+  background-image: linear-gradient(120deg, #1c1c1c 0%, #1b2922 55%, #26362d 100%);
+  color: var(--fg);
 }
 
 @theme inline {
-  --color-navy: var(--navy);
-  --color-midnight: var(--midnight);
-  --color-gold: var(--gold);
-  --color-gold-deep: var(--gold-deep);
-  --color-gold-soft: var(--gold-soft);
-  --color-ivory: var(--ivory);
-  --color-white: var(--white);
-  --color-slate: var(--slate);
-  --color-slate-light: var(--slate-light);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-on-accent: var(--on-accent);
+  --color-highlight: var(--highlight);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
   --color-line: var(--line);
-  --color-ink: var(--ink);
+  --color-line-strong: var(--line-strong);
+  --color-glow-1: var(--glow-1);
+  --color-glow-2: var(--glow-2);
+  --color-glow-3: var(--glow-3);
 
-  --font-serif: var(--font-dm-serif), "Times New Roman", serif;
-  --font-sans: var(--font-manrope), system-ui, sans-serif;
+  --font-display: var(--font-montserrat), system-ui, sans-serif;
+  --font-sans: var(--font-montserrat), system-ui, sans-serif;
 
   --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-marquee: marquee 45s linear infinite;
+  --animate-aurora: aurora 18s ease-in-out infinite alternate;
+  --animate-aurora-slow: aurora 26s ease-in-out infinite alternate-reverse;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-pulse-dot: pulse-dot 2.2s ease-out infinite;
+  --animate-shine: shine 3.6s ease-in-out infinite;
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes aurora {
+    0% {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    50% {
+      transform: translate3d(6%, 4%, 0) scale(1.12);
+    }
+    100% {
+      transform: translate3d(-5%, -3%, 0) scale(0.95);
+    }
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  @keyframes pulse-dot {
+    0% {
+      box-shadow: 0 0 0 0 color-mix(in srgb, var(--highlight) 55%, transparent);
+    }
+    100% {
+      box-shadow: 0 0 0 10px transparent;
+    }
+  }
+  @keyframes shine {
+    0%,
+    60% {
+      transform: translateX(-120%) skewX(-20deg);
+    }
+    100% {
+      transform: translateX(220%) skewX(-20deg);
+    }
+  }
 }
 
 html {
-  scroll-padding-top: 6rem;
+  scroll-padding-top: 7rem;
   -webkit-text-size-adjust: 100%;
-}
-
-body {
-  background: var(--ivory);
-  color: var(--ink);
-  font-family: var(--font-manrope), system-ui, sans-serif;
-  font-feature-settings: "ss01", "cv11";
+  color-scheme: dark;
+  background: var(--bg);
   overflow-x: clip;
 }
 
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-montserrat), system-ui, sans-serif;
+  overflow-x: clip;
+}
+
+/* Fine film-grain overlay for depth */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* Headings: Montserrat semibold, tight tracking (utilities can still override). */
+@layer base {
+  .font-display {
+    font-weight: 600;
+    letter-spacing: -0.035em;
+  }
+}
+
 ::selection {
-  background: var(--gold);
-  color: var(--navy);
+  background: #a8cdb0;
+  color: #13201a;
 }
 
 :focus-visible {
-  outline: 2px solid var(--gold-deep);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 
-.on-dark :focus-visible,
-.on-dark:focus-visible {
-  outline-color: var(--gold);
+/* ---------- Surfaces & text effects ---------- */
+
+@utility glass {
+  background: linear-gradient(180deg, var(--glass-from), var(--glass-to));
+  border: 1px solid var(--line);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+@utility glass-strong {
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  border: 1px solid var(--line-strong);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+
+@utility text-gradient {
+  background: linear-gradient(180deg, var(--fg) 35%, var(--muted) 140%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility text-accent-gradient {
+  background: linear-gradient(100deg, var(--ag-1) 0%, var(--ag-2) 50%, var(--ag-3) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility bg-accent-gradient {
+  background: linear-gradient(160deg, var(--btn-from), var(--btn-to));
+}
+
+/* Brand growth gradient — decorative fills (logo, bars, beams) */
+@utility bg-brand {
+  background: linear-gradient(120deg, #d3eadb 0%, #a8cdb0 45%, #6e8b6a 100%);
+}
+
+@utility bg-brand-y {
+  background: linear-gradient(180deg, #d3eadb 0%, #a8cdb0 45%, #4a6958 100%);
+}
+
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black 25%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black 25%, transparent 75%);
+}
+
+@utility bg-dots {
+  background-image: radial-gradient(var(--line-strong) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+@utility mask-fade-x {
+  mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
 }
 
 @utility text-balance {
@@ -76,15 +250,84 @@ body {
   text-wrap: pretty;
 }
 
-/* Editorial hairline grid used behind hero and dark sections */
-@utility hairlines {
-  background-image: linear-gradient(to right, color-mix(in oklab, var(--navy) 6%, transparent) 1px, transparent 1px);
-  background-size: calc(100% / 6) 100%;
+/* ---------- Interactive effects ---------- */
+
+@layer components {
+  /* Cursor spotlight + glowing border (driven by --x / --y from <SpotlightGroup>) */
+  .spotlight {
+    position: relative;
+    isolation: isolate;
+  }
+  .spotlight::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: radial-gradient(
+      480px circle at var(--x, 50%) var(--y, -30%),
+      color-mix(in srgb, var(--highlight) 14%, transparent),
+      transparent 45%
+    );
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .spotlight::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    pointer-events: none;
+    background: radial-gradient(
+      320px circle at var(--x, 50%) var(--y, -30%),
+      color-mix(in srgb, var(--accent-2) 75%, transparent),
+      transparent 40%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .spotlight:hover::before,
+  .spotlight-group:hover .spotlight::after {
+    opacity: 1;
+  }
+
+  /* Rotating light beam around a rounded card */
+  .beam {
+    position: relative;
+  }
+  .beam::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    pointer-events: none;
+    background: conic-gradient(from var(--beam-angle), transparent 0 65%, var(--highlight) 78%, transparent 90%);
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: beam-spin 7s linear infinite;
+  }
 }
 
-@utility hairlines-dark {
-  background-image: linear-gradient(to right, color-mix(in oklab, white 5%, transparent) 1px, transparent 1px);
-  background-size: calc(100% / 6) 100%;
+@property --beam-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes beam-spin {
+  to {
+    --beam-angle: 360deg;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

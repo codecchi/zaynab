@@ -4,6 +4,7 @@ import { services, servicesDisclaimer } from "@/data/services";
 import { localTitle, pageMetadata } from "@/lib/seo";
 import { PageHero } from "@/components/layout/page-hero";
 import { Container } from "@/components/ui/container";
+import { Accent } from "@/components/ui/section-heading";
 import { CategoryNav } from "@/components/sections/services/category-nav";
 import { CategorySection } from "@/components/sections/services/category-section";
 import { CtaBand } from "@/components/sections/cta-band";
@@ -22,21 +23,25 @@ export default function ServicesPage() {
         eyebrow="Service Catalogue"
         title={
           <>
-            Professional Services for <span className="text-gold italic">Every Stage of Business.</span>
+            Professional services for <Accent>every stage of business.</Accent>
           </>
         }
         description="For salaried professionals, freelancers, entrepreneurs and companies — seven practice areas covering registration, filing, compliance and advisory."
       />
-      <CategoryNav />
-      {services.map((s, i) => (
-        <CategorySection key={s.slug} service={s} index={i} />
-      ))}
-      <section aria-label="Disclaimer" className="border-line border-t bg-white">
-        <Container className="py-12">
-          <p className="text-slate flex max-w-4xl gap-4 text-sm leading-relaxed">
-            <Info className="text-gold-deep mt-0.5 size-4 shrink-0" aria-hidden />
+      <div className="pt-8">
+        <CategoryNav />
+        <div className="pt-6">
+          {services.map((s, i) => (
+            <CategorySection key={s.slug} service={s} index={i} />
+          ))}
+        </div>
+      </div>
+      <section aria-label="Disclaimer" className="pt-6">
+        <Container>
+          <p className="glass text-muted flex gap-4 rounded-2xl p-5 text-sm leading-relaxed sm:p-6">
+            <Info className="text-accent-2 mt-0.5 size-4 shrink-0" aria-hidden />
             <span>
-              <strong className="text-navy font-semibold">Disclaimer: </strong>
+              <strong className="text-fg font-semibold">Disclaimer: </strong>
               {servicesDisclaimer}
             </span>
           </p>

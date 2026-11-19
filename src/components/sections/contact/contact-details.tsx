@@ -14,13 +14,13 @@ function Row({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex gap-5 border-b border-white/10 py-6">
-      <span className="border-gold/30 text-gold grid size-11 shrink-0 place-items-center border">
+    <div className="border-line bg-surface/70 flex gap-4 rounded-2xl border p-4">
+      <span className="border-accent/25 text-accent-2 bg-accent/[0.06] grid size-10 shrink-0 place-items-center rounded-xl border">
         <Icon className="size-[18px]" />
       </span>
       <div className="min-w-0">
-        <dt className="text-slate-light text-[0.7rem] font-semibold tracking-[0.22em] uppercase">{label}</dt>
-        <dd className="text-ivory mt-1.5">{children}</dd>
+        <dt className="text-subtle text-[0.66rem] font-semibold tracking-[0.2em] uppercase">{label}</dt>
+        <dd className="text-fg mt-1 text-sm">{children}</dd>
       </div>
     </div>
   );
@@ -39,13 +39,13 @@ export function ContactDetails() {
   const mail = mailtoLink();
 
   return (
-    <aside aria-labelledby="details-title" className="on-dark bg-navy text-ivory relative overflow-hidden p-7 sm:p-10">
-      <div className="hairlines-dark pointer-events-none absolute inset-0" />
+    <aside aria-labelledby="details-title" className="glass relative overflow-hidden rounded-[2rem] p-6 sm:p-8">
+      <div className="bg-glow-1/80 pointer-events-none absolute -top-24 -right-24 size-64 rounded-full blur-[80px]" />
       <div className="relative">
-        <h2 id="details-title" className="font-serif text-3xl">
+        <h2 id="details-title" className="text-fg text-xl font-semibold tracking-tight">
           Contact Details
         </h2>
-        <dl className="mt-6 border-t border-white/10">
+        <dl className="mt-6 space-y-2.5">
           {address && (
             <Row icon={MapPin} label="Office Address">
               <address className="not-italic">{address}</address>
@@ -54,7 +54,7 @@ export function ContactDetails() {
           {phone && (
             <Row icon={Phone} label="Phone">
               {tel ? (
-                <a href={tel} className="hover:text-gold">
+                <a href={tel} className="hover:text-accent-2">
                   {phone}
                 </a>
               ) : (
@@ -65,7 +65,7 @@ export function ContactDetails() {
           {(wa || siteConfig.showPlaceholders) && (
             <Row icon={MessageCircle} label="WhatsApp">
               {wa ? (
-                <a href={wa} target="_blank" rel="noopener noreferrer" className="hover:text-gold">
+                <a href={wa} target="_blank" rel="noopener noreferrer" className="hover:text-accent-2">
                   {contact.whatsappDisplay}
                 </a>
               ) : (
@@ -76,7 +76,7 @@ export function ContactDetails() {
           {email && (
             <Row icon={Mail} label="Email">
               {mail ? (
-                <a href={mail} className="hover:text-gold break-all">
+                <a href={mail} className="hover:text-accent-2 break-all">
                   {email}
                 </a>
               ) : (
@@ -96,14 +96,14 @@ export function ContactDetails() {
         </dl>
 
         {wa && (
-          <Button href={wa} variant="gold" size="lg" className="mt-8 w-full">
+          <Button href={wa} size="lg" className="mt-6 w-full">
             <MessageCircle className="size-4" aria-hidden /> Chat on WhatsApp
           </Button>
         )}
 
         <div className="mt-8">
-          <p className="text-slate-light text-[0.7rem] font-semibold tracking-[0.22em] uppercase">Follow</p>
-          <SocialLinks className="mt-2" />
+          <p className="text-subtle text-[0.66rem] font-semibold tracking-[0.2em] uppercase">Follow</p>
+          <SocialLinks className="mt-3" />
         </div>
       </div>
     </aside>
@@ -115,46 +115,53 @@ export function MapEmbed() {
   if (!mapEmbedUrl && !siteConfig.showPlaceholders) return null;
 
   return (
-    <section aria-label="Office location map" className="bg-ivory">
-      <div className="relative h-[380px] w-full sm:h-[460px]">
-        {mapEmbedUrl ? (
-          <iframe
-            src={mapEmbedUrl}
-            title="Office location on Google Maps"
-            className="absolute inset-0 size-full border-0 grayscale-[35%]"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            allowFullScreen
-          />
-        ) : (
-          <div
-            role="img"
-            aria-label="Map placeholder"
-            className="hairlines absolute inset-0 grid place-items-center bg-[#ecebe5]"
-          >
-            <div className="flex flex-col items-center gap-4 text-center">
-              <span className="bg-navy text-gold grid size-14 place-items-center">
-                <MapPin className="size-6" aria-hidden />
-              </span>
-              <p className="text-slate text-[0.7rem] font-semibold tracking-[0.24em] uppercase">
-                Google Maps placeholder
-              </p>
-              <p className="text-slate max-w-xs text-sm">
-                Add the embed URL in site-config.ts to show the office location.
-              </p>
-            </div>
+    <section aria-label="Office location map" className="pb-8">
+      <div className="mx-auto w-full max-w-[1240px] px-5 sm:px-8 lg:px-10">
+        <div className="glass relative h-[380px] overflow-hidden rounded-[2rem] p-2 sm:h-[440px]">
+          <div className="relative h-full overflow-hidden rounded-[1.5rem]">
+            {mapEmbedUrl ? (
+              <iframe
+                src={mapEmbedUrl}
+                title="Office location on Google Maps"
+                className="absolute inset-0 size-full border-0 [filter:invert(0.9)_hue-rotate(180deg)_saturate(0.6)]"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
+            ) : (
+              <div
+                role="img"
+                aria-label="Map placeholder"
+                className="bg-surface-2 absolute inset-0 grid place-items-center"
+              >
+                <div className="bg-dots absolute inset-0 opacity-70" />
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,rgba(141,181,150,0.16),transparent_55%)]" />
+                <div className="relative flex flex-col items-center gap-4 text-center">
+                  <span className="bg-accent text-on-accent relative grid size-14 place-items-center rounded-full">
+                    <span className="animate-pulse-dot absolute inset-0 rounded-full" />
+                    <MapPin className="size-6" aria-hidden />
+                  </span>
+                  <p className="text-subtle text-[0.66rem] font-semibold tracking-[0.24em] uppercase">
+                    Google Maps placeholder
+                  </p>
+                  <p className="text-muted max-w-xs text-sm">
+                    Add the embed URL in site-config.ts to show the office location.
+                  </p>
+                </div>
+              </div>
+            )}
+            {mapLink && (
+              <a
+                href={mapLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass-strong text-fg absolute bottom-5 left-5 rounded-full px-5 py-3 text-sm font-semibold"
+              >
+                Get Directions
+              </a>
+            )}
           </div>
-        )}
-        {mapLink && (
-          <a
-            href={mapLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-navy text-ivory hover:bg-midnight absolute bottom-6 left-6 px-5 py-3 text-sm font-semibold"
-          >
-            Get Directions
-          </a>
-        )}
+        </div>
       </div>
     </section>
   );

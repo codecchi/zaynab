@@ -16,22 +16,24 @@ export function MediaFrame({
   sizes?: string;
 }) {
   return (
-    <div className={cn("relative overflow-hidden bg-[#ecebe5]", className)}>
+    <div className={cn("bg-surface-2 relative overflow-hidden", className)}>
       {src ? (
         <Image
           src={src}
           alt={alt}
           fill
           sizes={sizes}
-          className="ease-premium object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+          className="ease-premium object-cover transition-transform duration-700 group-hover:scale-[1.04]"
         />
       ) : (
         <div role="img" aria-label={label} className="absolute inset-0 grid place-items-center">
-          <div className="hairlines absolute inset-0" />
-          <div className="border-navy/10 absolute inset-6 border" />
-          <span className="text-slate relative text-[0.65rem] font-semibold tracking-[0.24em] uppercase">{label}</span>
+          <div className="bg-dots absolute inset-0 opacity-70" />
+          <div className="ease-premium absolute inset-0 bg-[radial-gradient(ellipse_at_30%_20%,rgba(74,105,88,0.25),transparent_60%)] transition-opacity duration-700 group-hover:opacity-70" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_90%,rgba(141,181,150,0.18),transparent_55%)]" />
+          <span className="text-subtle relative text-[0.62rem] font-semibold tracking-[0.24em] uppercase">{label}</span>
         </div>
       )}
+      <div aria-hidden className="ring-line pointer-events-none absolute inset-0 rounded-[inherit] ring-1 ring-inset" />
     </div>
   );
 }

@@ -26,15 +26,12 @@ export function ProfileIntro() {
     .filter(([, v]) => v);
 
   return (
-    <section aria-labelledby="profile-title" className="bg-white">
-      <Container className="grid gap-14 py-24 sm:py-28 lg:grid-cols-12 lg:gap-20">
+    <section aria-labelledby="profile-title" className="relative overflow-x-clip py-24 sm:py-28">
+      <Container className="grid gap-12 lg:grid-cols-12 lg:gap-16">
         <Reveal className="lg:col-span-5">
-          <div className="relative lg:sticky lg:top-32">
-            <div
-              aria-hidden
-              className="border-gold/60 absolute -right-4 -bottom-4 h-full w-full border sm:-right-5 sm:-bottom-5"
-            />
-            <Portrait className="relative aspect-[4/5] w-full" />
+          <div className="glass relative rounded-[2rem] p-2.5 lg:sticky lg:top-28">
+            <div className="bg-glow-1/80 pointer-events-none absolute -inset-10 -z-10 rounded-full blur-[80px]" />
+            <Portrait className="aspect-[4/5] w-full rounded-[1.5rem]" />
           </div>
         </Reveal>
 
@@ -43,28 +40,21 @@ export function ProfileIntro() {
             <Eyebrow>Professional Introduction</Eyebrow>
             <h2
               id="profile-title"
-              className="text-navy mt-5 font-serif text-4xl leading-[1.08] sm:text-5xl lg:text-[3.4rem]"
+              className="font-display text-gradient mt-6 pb-1 text-4xl leading-[1.05] font-bold sm:text-5xl lg:text-[3.4rem]"
             >
               {name ?? "Professional Profile"}
             </h2>
             {(title || designation) && (
-              <p className="text-gold-deep mt-4 text-sm font-semibold tracking-[0.16em] uppercase">
+              <p className="text-accent-2 mt-4 text-xs font-semibold tracking-[0.18em] uppercase">
                 {[title, designation].filter(Boolean).join(" · ")}
               </p>
             )}
           </Reveal>
 
           {bio.length > 0 && (
-            <Reveal delay={0.1} className="text-slate mt-10 space-y-6 text-lg leading-relaxed text-pretty">
+            <Reveal delay={0.1} className="text-muted mt-9 space-y-5 text-base leading-relaxed text-pretty sm:text-lg">
               {bio.map((p, i) => (
-                <p
-                  key={i}
-                  className={
-                    i === 0
-                      ? "first-letter:text-navy first-letter:float-left first-letter:mr-3 first-letter:font-serif first-letter:text-6xl first-letter:leading-[0.85]"
-                      : ""
-                  }
-                >
+                <p key={i} className={i === 0 ? "text-fg" : ""}>
                   {p}
                 </p>
               ))}
@@ -72,15 +62,15 @@ export function ProfileIntro() {
           )}
 
           {facts.length > 0 && (
-            <Reveal delay={0.15} className="mt-14">
-              <h3 className="text-gold-deep text-[0.72rem] font-semibold tracking-[0.24em] uppercase">
+            <Reveal delay={0.15} className="mt-12">
+              <h3 className="text-subtle text-[0.68rem] font-semibold tracking-[0.22em] uppercase">
                 Background at a Glance
               </h3>
-              <dl className="border-line mt-6 grid border-t sm:grid-cols-2">
+              <dl className="mt-5 grid gap-3 sm:grid-cols-2">
                 {facts.map(([label, value]) => (
-                  <div key={label} className="border-line border-b py-5 sm:odd:pr-6 sm:even:border-l sm:even:pl-6">
-                    <dt className="text-slate text-xs font-semibold tracking-[0.14em] uppercase">{label}</dt>
-                    <dd className="text-navy mt-2 font-serif text-xl">{value}</dd>
+                  <div key={label} className="glass rounded-2xl p-5">
+                    <dt className="text-subtle text-[0.68rem] font-semibold tracking-[0.16em] uppercase">{label}</dt>
+                    <dd className="text-fg mt-2 text-base font-semibold">{value}</dd>
                   </div>
                 ))}
               </dl>

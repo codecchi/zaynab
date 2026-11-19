@@ -2,16 +2,7 @@ import Link from "next/link";
 import { siteConfig } from "@/data/site-config";
 import { cn } from "@/lib/utils";
 
-export function Logo({
-  tone = "light",
-  className,
-  onClick,
-}: {
-  tone?: "light" | "dark";
-  className?: string;
-  onClick?: () => void;
-}) {
-  const dark = tone === "dark";
+export function Logo({ className, onClick, compact }: { className?: string; onClick?: () => void; compact?: boolean }) {
   return (
     <Link
       href="/"
@@ -21,25 +12,18 @@ export function Logo({
     >
       <span
         aria-hidden
-        className={cn(
-          "grid size-10 shrink-0 place-items-center border font-serif text-lg leading-none transition-colors duration-300",
-          dark ? "border-gold/60 text-gold" : "border-navy/80 bg-navy text-gold group-hover:bg-midnight",
-        )}
+        className="bg-brand text-on-accent relative grid size-9 shrink-0 place-items-center overflow-hidden rounded-xl text-[0.8rem] font-bold shadow-[0_0_24px_-4px_rgba(141,181,150,0.6)]"
       >
         {siteConfig.brand.monogram}
+        <span className="absolute inset-0 rounded-xl ring-1 ring-white/30 ring-inset" />
       </span>
       <span className="flex flex-col leading-none">
-        <span className={cn("font-serif text-[1.2rem] tracking-tight", dark ? "text-ivory" : "text-navy")}>
-          {siteConfig.brand.name}
-        </span>
-        <span
-          className={cn(
-            "mt-1.5 hidden text-[0.6rem] font-semibold tracking-[0.22em] uppercase min-[420px]:block",
-            dark ? "text-slate-light" : "text-slate",
-          )}
-        >
-          {siteConfig.brand.tagline}
-        </span>
+        <span className="text-fg text-[0.98rem] font-semibold tracking-tight">{siteConfig.brand.name}</span>
+        {!compact && (
+          <span className="text-subtle mt-1 hidden text-[0.56rem] font-semibold tracking-[0.2em] uppercase min-[420px]:block">
+            {siteConfig.brand.tagline}
+          </span>
+        )}
       </span>
     </Link>
   );

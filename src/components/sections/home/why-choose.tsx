@@ -1,56 +1,54 @@
-import { ArrowUpRight } from "lucide-react";
 import { values } from "@/data/services";
-import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
+import { SpotlightGroup } from "@/components/ui/effects";
 import { Icon } from "@/components/ui/icon";
 import { RevealGroup, RevealItem } from "@/components/ui/reveal";
-import { SectionHeading } from "@/components/ui/section-heading";
+import { Accent, SectionHeading } from "@/components/ui/section-heading";
 
 export function WhyChoose() {
   return (
-    <section aria-labelledby="why-title" className="on-dark bg-midnight text-ivory relative overflow-hidden">
-      <div className="hairlines-dark pointer-events-none absolute inset-0" />
-      <Container className="relative grid gap-14 py-24 sm:py-32 lg:grid-cols-12 lg:gap-16">
-        <div className="lg:sticky lg:top-32 lg:col-span-5 lg:self-start">
-          <SectionHeading
-            tone="dark"
-            eyebrow="Why Choose Us"
-            title={
-              <span id="why-title">
-                Professional Expertise. Transparent Advice.{" "}
-                <span className="text-gold italic">Lasting Relationships.</span>
-              </span>
-            }
-            description="Tax and compliance matters call for precision, discretion and clear communication. These principles shape every engagement."
-          />
-          <Button href="/about" variant="outline-light" className="mt-10">
-            Our Approach
-            <ArrowUpRight className="size-4" aria-hidden />
-          </Button>
-        </div>
+    <section aria-labelledby="why-title" className="relative py-24 sm:py-32">
+      <Container>
+        <SectionHeading
+          id="why-title"
+          align="center"
+          eyebrow="Why Choose Us"
+          title={
+            <>
+              Professional Expertise. Transparent Advice. <Accent>Lasting Relationships.</Accent>
+            </>
+          }
+          description="Tax and compliance matters call for precision, discretion and clear communication. These principles shape every engagement."
+        />
 
-        <div className="lg:col-span-7">
-          <RevealGroup as="ul" stagger={0.06} className="border-t border-white/10">
+        <SpotlightGroup className="mt-14">
+          <RevealGroup as="ul" stagger={0.06} className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {values.map((v, i) => (
               <RevealItem
                 as="li"
                 key={v.title}
-                className="group grid grid-cols-[auto_1fr] gap-5 border-b border-white/10 py-7 sm:grid-cols-[auto_1fr_auto] sm:gap-7"
+                className={`glass spotlight group relative overflow-hidden rounded-3xl p-7 ${i === 0 ? "sm:col-span-2" : ""}`}
               >
-                <span className="border-gold/30 text-gold group-hover:border-gold group-hover:bg-gold group-hover:text-navy grid size-12 place-items-center border transition-colors duration-500">
+                {i === 0 && (
+                  <div className="bg-glow-1/80 pointer-events-none absolute -top-24 -right-24 size-72 rounded-full blur-[80px]" />
+                )}
+                <span className="border-accent/25 text-accent-2 ease-premium bg-accent/[0.06] relative grid size-12 place-items-center rounded-2xl border transition-transform duration-500 group-hover:scale-110">
                   <Icon name={v.icon} className="size-5" />
                 </span>
-                <div>
-                  <h3 className="font-serif text-2xl leading-tight">{v.title}</h3>
-                  <p className="text-slate-light mt-2 max-w-lg text-[0.95rem] leading-relaxed">{v.description}</p>
-                </div>
-                <span aria-hidden className="hidden font-serif text-lg text-white/25 sm:block">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
+                <h3
+                  className={`text-fg relative mt-7 font-semibold tracking-tight ${i === 0 ? "text-2xl sm:text-[1.7rem]" : "text-lg"}`}
+                >
+                  {v.title}
+                </h3>
+                <p
+                  className={`text-muted relative mt-2.5 leading-relaxed ${i === 0 ? "max-w-md text-base" : "text-sm"}`}
+                >
+                  {v.description}
+                </p>
               </RevealItem>
             ))}
           </RevealGroup>
-        </div>
+        </SpotlightGroup>
       </Container>
     </section>
   );

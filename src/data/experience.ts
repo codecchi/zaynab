@@ -59,9 +59,9 @@ export const journey: JourneyStage[] = [
   },
   {
     stage: "Current Professional Role",
-    period: "[Year] – Present",
-    title: "[Current role and practice]",
-    description: "[What the client focuses on today.]",
-    sample: true,
+    period: "Present",
+    title: "ACCA Tax Consultant — Wah Cantt",
+    description:
+      "Providing taxation, corporate compliance and business advisory services to individuals, freelancers and businesses across Pakistan.",
   },
 ];

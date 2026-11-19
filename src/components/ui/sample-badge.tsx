@@ -4,7 +4,6 @@ import { cn } from "@/lib/utils";
 /** Small "Sample" tag shown on placeholder items while placeholder mode is on. */
 export function SampleBadge({
   show = true,
-  tone = "light",
   label = "Sample",
   className,
 }: {
@@ -17,8 +16,7 @@ export function SampleBadge({
   return (
     <span
       className={cn(
-        "inline-flex items-center border border-dashed px-2 py-0.5 text-[0.65rem] font-semibold tracking-[0.16em] uppercase",
-        tone === "dark" ? "border-gold/50 text-gold" : "border-gold-deep/50 text-gold-deep",
+        "border-accent/40 text-accent-2 inline-flex items-center rounded-full border border-dashed px-2.5 py-0.5 text-[0.62rem] font-semibold tracking-[0.16em] uppercase",
         className,
       )}
     >
@@ -30,7 +28,6 @@ export function SampleBadge({
 /** A note explaining placeholder content, only in placeholder mode. */
 export function PlaceholderNote({
   children,
-  tone = "light",
   className,
 }: {
   children: React.ReactNode;
@@ -41,8 +38,7 @@ export function PlaceholderNote({
   return (
     <p
       className={cn(
-        "border-l-2 pl-4 text-sm leading-relaxed",
-        tone === "dark" ? "border-gold/60 text-slate-light" : "border-gold-deep/60 text-slate",
+        "border-accent/30 text-muted bg-surface/70 rounded-xl border border-dashed px-4 py-3 text-sm leading-relaxed",
         className,
       )}
     >

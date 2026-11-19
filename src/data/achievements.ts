@@ -7,7 +7,7 @@ import type { Achievement, Metric } from "./types";
  * Counters only animate for real numbers.
  */
 export const metrics: Metric[] = [
-  { id: "experience", label: "Years of Professional Experience", value: null, suffix: "+" },
+  { id: "experience", label: "Years of Professional Experience", value: 2, suffix: "+" },
   { id: "clients", label: "Clients Served", value: null, suffix: "+" },
   { id: "businesses", label: "Businesses Assisted", value: null, suffix: "+" },
   { id: "cases", label: "Tax & Corporate Cases Handled", value: null, suffix: "+" },

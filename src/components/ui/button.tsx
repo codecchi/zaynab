@@ -3,15 +3,17 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 export const buttonVariants = cva(
-  "group/btn relative inline-flex min-h-12 cursor-pointer items-center justify-center gap-2.5 overflow-hidden px-6 text-[0.95rem] font-semibold tracking-[0.01em] whitespace-nowrap transition-[color,background-color,border-color,box-shadow,transform] duration-300 ease-premium disabled:pointer-events-none disabled:opacity-60",
+  "group/btn relative inline-flex min-h-12 cursor-pointer items-center justify-center gap-2.5 overflow-hidden rounded-full px-6 text-[0.92rem] font-semibold whitespace-nowrap transition-[color,background-color,border-color,box-shadow,transform] duration-300 ease-premium active:scale-[0.98] disabled:pointer-events-none disabled:opacity-60",
   {
     variants: {
       variant: {
-        primary: "bg-navy text-ivory hover:bg-midnight hover:shadow-[0_10px_30px_-12px_rgba(16,28,44,0.55)]",
-        gold: "bg-gold text-navy hover:bg-[#d2b57e] hover:shadow-[0_10px_30px_-12px_rgba(198,166,107,0.6)]",
-        outline: "border border-navy/25 text-navy hover:border-navy hover:bg-navy hover:text-ivory",
-        "outline-light": "border border-white/25 text-ivory hover:border-gold hover:text-gold",
-        link: "min-h-11 px-0 text-navy underline-offset-[6px] hover:underline",
+        /** Mint gradient with soft glow with soft lift + light sweep */
+        primary:
+          "bg-accent-gradient text-on-accent shadow-[var(--btn-shadow)] hover:shadow-[var(--btn-shadow-hover)] hover:-translate-y-0.5",
+        /** Frosted glass */
+        secondary:
+          "border border-line-strong bg-surface/70 text-fg backdrop-blur-md hover:border-accent/30 hover:bg-accent/[0.06]",
+        ghost: "min-h-11 px-0 text-fg hover:text-accent-2",
       },
       size: {
         md: "",
@@ -29,8 +31,24 @@ type Props = VariantProps<typeof buttonVariants> & {
   children: React.ReactNode;
 } & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "className" | "children">;
 
+function Shine({ show }: { show: boolean }) {
+  if (!show) return null;
+  return (
+    <span
+      aria-hidden
+      className="animate-shine pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+    />
+  );
+}
+
 export function Button({ href, external, variant, size, className, children, ...rest }: Props) {
   const classes = cn(buttonVariants({ variant, size }), className);
+  const content = (
+    <>
+      <Shine show={(variant ?? "primary") === "primary"} />
+      <span className="relative inline-flex items-center gap-2.5">{children}</span>
+    </>
+  );
   if (href) {
     if (external || /^(https?:|mailto:|tel:)/.test(href)) {
       return (
@@ -39,19 +57,19 @@ export function Button({ href, external, variant, size, className, children, ...
           className={classes}
           {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
         >
-          {children}
+          {content}
         </a>
       );
     }
     return (
       <Link href={href} className={classes}>
-        {children}
+        {content}
       </Link>
     );
   }
   return (
     <button className={classes} {...rest}>
-      {children}
+      {content}
     </button>
   );
 }

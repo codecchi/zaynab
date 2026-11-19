@@ -23,17 +23,17 @@ export default function PrivacyPage() {
         title="Privacy Policy"
         description={updated ? `Last updated: ${updated}` : undefined}
       />
-      <section className="bg-white">
-        <Container className="grid gap-12 py-20 sm:py-24 lg:grid-cols-12">
+      <section className="py-16 sm:py-20">
+        <Container className="grid gap-10 lg:grid-cols-12">
           <nav aria-label="On this page" className="hidden lg:col-span-3 lg:block">
-            <div className="sticky top-32">
-              <p className="text-gold-deep text-[0.7rem] font-semibold tracking-[0.22em] uppercase">On this page</p>
-              <ol className="border-line mt-4 space-y-1 border-l">
+            <div className="glass sticky top-28 rounded-3xl p-5">
+              <p className="text-subtle text-[0.66rem] font-semibold tracking-[0.2em] uppercase">On this page</p>
+              <ol className="mt-4 space-y-0.5">
                 {privacy.sections.map((s, i) => (
                   <li key={s.title}>
                     <a
                       href={`#section-${i + 1}`}
-                      className="text-slate hover:border-gold-deep hover:text-navy -ml-px block border-l border-transparent py-1.5 pl-4 text-sm"
+                      className="text-muted hover:text-fg hover:bg-accent/[0.05] block rounded-xl px-3 py-2 text-sm transition-colors"
                     >
                       {s.title}
                     </a>
@@ -42,8 +42,8 @@ export default function PrivacyPage() {
               </ol>
             </div>
           </nav>
-          <article className="max-w-3xl lg:col-span-9">
-            <PlaceholderNote className="mb-12">
+          <article className="glass rounded-[2rem] p-7 sm:p-10 lg:col-span-9">
+            <PlaceholderNote className="mb-10">
               Template policy — have it reviewed and adapted to the practice&apos;s actual data handling before
               publishing.
             </PlaceholderNote>
@@ -51,13 +51,13 @@ export default function PrivacyPage() {
               <section
                 key={s.title}
                 id={`section-${i + 1}`}
-                className="border-line scroll-mt-32 border-t py-10 first-of-type:border-t-0 first-of-type:pt-0"
+                className="border-line scroll-mt-32 border-t py-9 last:pb-0 first-of-type:border-t-0 first-of-type:pt-0"
               >
-                <h2 className="text-navy font-serif text-3xl">
-                  <span className="text-gold-deep mr-3">{String(i + 1).padStart(2, "0")}</span>
+                <h2 className="text-fg text-xl font-semibold tracking-tight sm:text-2xl">
+                  <span className="text-accent-gradient mr-3">{String(i + 1).padStart(2, "0")}</span>
                   {s.title}
                 </h2>
-                <div className="text-slate mt-5 space-y-4 text-[1.05rem] leading-relaxed">
+                <div className="text-muted mt-4 space-y-4 leading-relaxed">
                   {s.body.map((p, j) => (
                     <p key={j}>{p.replace("{brand}", siteConfig.brand.name)}</p>
                   ))}

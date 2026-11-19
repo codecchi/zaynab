@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
-import { Eyebrow } from "@/components/ui/section-heading";
+import { Aurora } from "@/components/ui/effects";
+import { Accent, Eyebrow } from "@/components/ui/section-heading";
 
 export const metadata: Metadata = {
   title: "Page Not Found",
@@ -11,27 +12,28 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <section className="on-dark bg-navy text-ivory relative flex min-h-[80svh] items-center overflow-hidden pt-[88px]">
-      <div className="hairlines-dark pointer-events-none absolute inset-0" />
-      <span
-        aria-hidden
-        className="pointer-events-none absolute top-1/2 right-[-4%] -translate-y-1/2 font-serif text-[38vw] leading-none text-white/[0.03] select-none"
-      >
-        404
-      </span>
-      <Container className="relative py-24">
-        <Eyebrow tone="dark">Error 404</Eyebrow>
-        <h1 className="mt-6 max-w-2xl font-serif text-5xl leading-[1.05] sm:text-7xl">
-          This page could not be <span className="text-gold italic">found.</span>
+    <section className="relative flex min-h-[88svh] items-center overflow-hidden pt-28">
+      <Aurora />
+      <div className="bg-grid pointer-events-none absolute inset-0" />
+      <Container className="relative flex flex-col items-center py-24 text-center">
+        <p
+          aria-hidden
+          className="font-display from-accent/25 bg-gradient-to-b to-transparent bg-clip-text text-[9rem] leading-none font-bold tracking-[-0.06em] text-transparent select-none sm:text-[13rem]"
+        >
+          404
+        </p>
+        <Eyebrow className="-mt-4">Page not found</Eyebrow>
+        <h1 className="font-display text-gradient mt-6 max-w-2xl pb-1 text-4xl leading-[1.05] font-bold sm:text-6xl">
+          This page could not be <Accent>found.</Accent>
         </h1>
-        <p className="text-slate-light mt-6 max-w-lg text-lg leading-relaxed">
+        <p className="text-muted mt-6 max-w-lg text-base leading-relaxed sm:text-lg">
           The page may have moved, or the address may be mistyped. Let&apos;s get you back on track.
         </p>
-        <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-          <Button href="/" variant="gold" size="lg">
+        <div className="mt-10 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+          <Button href="/" size="lg">
             <ArrowLeft className="size-4" aria-hidden /> Back to Home
           </Button>
-          <Button href="/services" variant="outline-light" size="lg">
+          <Button href="/services" variant="secondary" size="lg">
             View Services
           </Button>
         </div>

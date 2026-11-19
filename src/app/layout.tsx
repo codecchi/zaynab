@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Serif_Display, Manrope } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import { siteConfig } from "@/data/site-config";
 import { keywords, localTitle, professionalServiceJsonLd } from "@/lib/seo";
 import { Header } from "@/components/layout/header";
@@ -8,16 +8,11 @@ import { WhatsAppFloat } from "@/components/layout/whatsapp-float";
 import { SmoothScroll } from "@/components/providers/smooth-scroll";
 import "./globals.css";
 
-const serif = DM_Serif_Display({
-  variable: "--font-dm-serif",
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
   subsets: ["latin"],
-  weight: "400",
   style: ["normal", "italic"],
-});
-
-const sans = Manrope({
-  variable: "--font-manrope",
-  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -44,16 +39,16 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#101C2C",
+  themeColor: "#1B2922",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en-PK" className={`${serif.variable} ${sans.variable} antialiased`}>
+    <html lang="en-PK" className={`${montserrat.variable} antialiased`}>
       <body className="flex min-h-svh flex-col">
         <a
           href="#main"
-          className="focus:bg-navy focus:text-ivory sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-5 focus:py-3"
+          className="focus:bg-accent focus:text-on-accent sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-full focus:px-5 focus:py-3"
         >
           Skip to main content
         </a>

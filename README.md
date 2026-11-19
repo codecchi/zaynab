@@ -75,10 +75,19 @@ src/
 
 ## Design system
 
-- **Colours:** Deep Navy `#101C2C`, Midnight `#172A40`, Champagne Gold `#C6A66B`, Warm Ivory `#F7F6F2`, border `#E7E7E3`. Tokens are in `src/app/globals.css`.
-- **Gold text rule:** gold text is used only on navy. On light backgrounds, text uses gold-deep `#8A6A35` (4.6:1 contrast). Slate body text is slightly darkened to `#5F6A7C` to meet WCAG AA.
-- **Type:** DM Serif Display (headings) and Manrope (body).
-- **Motion:** Framer Motion section reveals, a GSAP ScrollTrigger timeline rail and Lenis smooth scrolling. All motion respects `prefers-reduced-motion`.
+- **Palette:** "ReGrowth", dark-first.
+  - `#1B2922` deep forest (base), `#1C1C1C` charcoal, `#435146` grey-green, `#4A6958` sage.
+  - Readable tints derived from sage: `#A8CDB0` mint (buttons, accents), `#C7E3CC` pale mint (labels), `#8DB596` leaf (decorative).
+- **Readability rules:**
+  - Sage and grey-green are too dark for text on these backgrounds, so they appear as glows, surfaces and gradients.
+  - Deep bands (stats, closing call to action, footer, vision/mission cards) add `.theme-deep`: a charcoal-to-forest gradient like the palette's backdrop.
+  - All text tokens meet WCAG AA. Tokens live in `src/app/globals.css`.
+- **Effects:**
+  - Glass surfaces, green aurora glows, a masked grid and film grain
+  - Cursor-following spotlight cards and rotating light-beam borders
+  - Gradient headlines, a floating glass navigation bar, a service marquee and a hero showcase that tilts into place as you scroll
+- **Type:** Montserrat throughout: bold or semibold for headings, regular for body text.
+- **Motion:** Framer Motion reveals, a GSAP ScrollTrigger timeline beam and Lenis smooth scrolling. All motion respects `prefers-reduced-motion`.
 
 ## AI design skills
 

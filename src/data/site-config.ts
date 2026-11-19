@@ -15,9 +15,9 @@ export const siteConfig = {
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.example.com",
 
   brand: {
-    name: "[Brand Name]",
+    name: "Zaynab Ali",
     /** 1–2 letters shown in the logo mark and favicon area. */
-    monogram: "TC",
+    monogram: "ZA",
     tagline: "Tax, Compliance & Business Advisory",
     description:
       "Professional taxation, corporate compliance and business advisory services for individuals, freelancers and businesses in Pakistan.",
@@ -25,8 +25,8 @@ export const siteConfig = {
 
   location: {
     /** Used in page titles and local SEO. Leave the brackets until confirmed. */
-    city: "[City]",
-    region: "[Province]",
+    city: "Wah Cantt",
+    region: "Punjab",
     country: "Pakistan",
     countryCode: "PK",
     streetAddress: "[Office Address]",
@@ -34,11 +34,11 @@ export const siteConfig = {
   },
 
   contact: {
-    email: "[email@yourdomain.com]",
-    phone: "[+92 XXX XXXXXXX]",
+    email: "zaynabjaffreyacca@gmail.com",
+    phone: "+92 314 9371415",
     /** WhatsApp number in international format, digits only, e.g. "923001234567". Empty = not configured. */
-    whatsappNumber: "",
-    whatsappDisplay: "[WhatsApp Number]",
+    whatsappNumber: "923149371415",
+    whatsappDisplay: "+92 314 9371415",
     whatsappMessage: "Hello, I would like to book a consultation.",
     businessHours: ["[Monday – Friday: 00:00 – 00:00]", "[Saturday: 00:00 – 00:00]", "[Sunday: Closed]"],
     /** Google Maps embed URL (Share → Embed a map → copy the src). Empty = neutral placeholder. */
@@ -71,6 +71,7 @@ export const siteConfig = {
     defaultTitle: "Tax Consultant in Pakistan — Tax, Compliance & Business Advisory",
     keywords: [
       "Tax Consultant in Pakistan",
+      "ACCA Tax Consultant",
       "Tax Consultant in [City]",
       "FBR Tax Return Filing",
       "NTN Registration Pakistan",

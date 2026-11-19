@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { siteConfig } from "@/data/site-config";
 import { localTitle, pageMetadata } from "@/lib/seo";
 import { Hero } from "@/components/sections/home/hero";
+import { ServicesMarquee } from "@/components/sections/home/services-marquee";
 import { Highlights } from "@/components/sections/home/highlights";
 import { Introduction } from "@/components/sections/home/introduction";
 import { Expertise } from "@/components/sections/home/expertise";
@@ -24,6 +25,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <ServicesMarquee />
       <Highlights />
       <Introduction />
       <Expertise />

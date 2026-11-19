@@ -5,10 +5,10 @@ import { journey } from "@/data/experience";
 import { display, visible } from "@/lib/content";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { Container } from "@/components/ui/container";
-import { SectionHeading } from "@/components/ui/section-heading";
+import { Accent, SectionHeading } from "@/components/ui/section-heading";
 import { SampleBadge } from "@/components/ui/sample-badge";
 
-/** Career timeline; the gold rail fills as you scroll (GSAP ScrollTrigger). */
+/** Career timeline; a glowing green beam fills the rail as you scroll (GSAP ScrollTrigger). */
 export function Journey() {
   const scope = useRef<HTMLElement>(null);
   const stages = visible(journey);
@@ -29,8 +29,9 @@ export function Journey() {
         gsap.utils.toArray<HTMLElement>(".journey-item").forEach((el) => {
           gsap.from(el, {
             opacity: 0,
-            y: 28,
-            duration: 0.8,
+            y: 30,
+            filter: "blur(6px)",
+            duration: 0.9,
             ease: "power3.out",
             scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none none" },
           });
@@ -43,37 +44,44 @@ export function Journey() {
   if (stages.length === 0) return null;
 
   return (
-    <section ref={scope} aria-labelledby="journey-title" className="bg-ivory">
-      <Container className="grid gap-14 py-24 sm:py-32 lg:grid-cols-12 lg:gap-16">
-        <div className="lg:sticky lg:top-32 lg:col-span-4 lg:self-start">
+    <section ref={scope} aria-labelledby="journey-title" className="relative py-24 sm:py-32">
+      <Container className="grid gap-14 lg:grid-cols-12 lg:gap-16">
+        <div className="lg:sticky lg:top-32 lg:col-span-5 lg:self-start">
           <SectionHeading
+            id="journey-title"
             eyebrow="Professional Journey"
-            title={<span id="journey-title">A Career Shaped by Practice.</span>}
+            title={
+              <>
+                A career shaped <Accent>by practice.</Accent>
+              </>
+            }
             description="The milestones, roles and learning that have shaped a disciplined, client-first approach."
           />
         </div>
 
-        <div className="journey-list relative lg:col-span-8">
-          <div aria-hidden className="bg-line absolute top-2 bottom-2 left-[7px] w-px sm:left-[calc(9rem+7px)]">
-            <div className="journey-fill bg-gold-deep h-full w-full origin-top" />
+        <div className="journey-list relative lg:col-span-7">
+          <div aria-hidden className="bg-accent/[0.08] absolute top-3 bottom-3 left-[19px] w-px">
+            <div className="journey-fill bg-brand-y h-full w-full origin-top shadow-[0_0_14px_2px_rgba(141,181,150,0.5)]" />
           </div>
-          <ol className="space-y-12 sm:space-y-14">
+          <ol className="space-y-5">
             {stages.map((s, i) => (
-              <li key={i} className="journey-item relative grid gap-2 pl-10 sm:grid-cols-[9rem_1fr] sm:gap-10 sm:pl-0">
-                <p className="text-gold-deep text-sm font-semibold sm:pt-1 sm:pr-4 sm:text-right">{s.period}</p>
+              <li key={i} className="journey-item relative pl-14">
                 <span
                   aria-hidden
-                  className="border-gold-deep bg-ivory absolute top-1.5 left-0 size-[15px] border-2 sm:left-[9rem]"
-                />
-                <div className="sm:pl-10">
+                  className="glass-strong absolute top-6 left-0 grid size-10 place-items-center rounded-full"
+                >
+                  <span className="bg-highlight size-2 rounded-full shadow-[0_0_10px_2px_rgba(141,181,150,0.7)]" />
+                </span>
+                <div className="glass rounded-3xl p-6 sm:p-7">
                   <div className="flex flex-wrap items-center gap-3">
-                    <p className="text-slate text-[0.7rem] font-semibold tracking-[0.22em] uppercase">{s.stage}</p>
+                    <span className="border-accent/25 text-accent-2 bg-accent/[0.06] rounded-full border px-3 py-1 text-xs font-semibold">
+                      {s.period}
+                    </span>
+                    <p className="text-subtle text-[0.68rem] font-semibold tracking-[0.2em] uppercase">{s.stage}</p>
                     <SampleBadge show={s.sample} />
                   </div>
-                  <h3 className="text-navy mt-3 font-serif text-2xl leading-snug sm:text-[1.75rem]">{s.title}</h3>
-                  {display(s.description) && (
-                    <p className="text-slate mt-3 max-w-xl leading-relaxed">{s.description}</p>
-                  )}
+                  <h3 className="text-fg mt-4 text-xl leading-snug font-semibold tracking-tight">{s.title}</h3>
+                  {display(s.description) && <p className="text-muted mt-2 text-sm leading-relaxed">{s.description}</p>}
                 </div>
               </li>
             ))}

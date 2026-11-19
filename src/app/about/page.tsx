@@ -3,6 +3,7 @@ import { profile } from "@/data/profile";
 import { display } from "@/lib/content";
 import { localTitle, pageMetadata } from "@/lib/seo";
 import { PageHero } from "@/components/layout/page-hero";
+import { Accent } from "@/components/ui/section-heading";
 import { ProfileIntro } from "@/components/sections/about/profile-intro";
 import { Credentials } from "@/components/sections/about/credentials";
 import { ExperienceSection } from "@/components/sections/about/experience";
@@ -13,7 +14,7 @@ import { CtaBand } from "@/components/sections/cta-band";
 const name = display(profile.fullName);
 
 export const metadata: Metadata = pageMetadata({
-  title: name ? `About ${name}` : "About",
+  title: "Profile & Experience",
   description: `The professional background, qualifications, experience and approach of ${name ?? "our lead consultant"} — ${localTitle()} for tax, compliance and business advisory.`,
   path: "/about",
 });
@@ -26,7 +27,7 @@ export default function AboutPage() {
         eyebrow="Professional Profile"
         title={
           <>
-            Integrity, Experience <span className="text-gold italic">& Professional Care.</span>
+            Integrity, experience <Accent>& professional care.</Accent>
           </>
         }
         description="The background, qualifications and principles behind every engagement — so you know exactly who you are trusting with your tax and compliance matters."

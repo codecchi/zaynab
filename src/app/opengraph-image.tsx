@@ -16,10 +16,11 @@ export default function OpengraphImage() {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        background: "linear-gradient(135deg, #101C2C 0%, #172A40 100%)",
-        color: "#F7F6F2",
+        background: "linear-gradient(120deg, #1C1C1C 0%, #1B2922 50%, #435146 100%)",
+        color: "#EEF2EE",
         padding: "72px 80px",
-        fontFamily: "serif",
+        fontFamily: "sans-serif",
+        fontWeight: 600,
       }}
     >
       <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
@@ -27,8 +28,9 @@ export default function OpengraphImage() {
           style={{
             width: 64,
             height: 64,
-            border: "2px solid #C6A66B",
-            color: "#C6A66B",
+            background: "linear-gradient(135deg, #D3EADB, #A8CDB0 45%, #6E8B6A)",
+            borderRadius: 14,
+            color: "#13201A",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -43,7 +45,7 @@ export default function OpengraphImage() {
             style={{
               fontSize: 16,
               letterSpacing: 4,
-              color: "#9AA3B2",
+              color: "#B8C6BC",
               textTransform: "uppercase",
               fontFamily: "sans-serif",
             }}
@@ -54,7 +56,7 @@ export default function OpengraphImage() {
       </div>
       <div style={{ display: "flex", flexDirection: "column" }}>
         <div style={{ fontSize: 76, lineHeight: 1.05 }}>Strategic Tax Solutions.</div>
-        <div style={{ fontSize: 76, lineHeight: 1.05, color: "#C6A66B", fontStyle: "italic" }}>
+        <div style={{ fontSize: 76, lineHeight: 1.05, color: "#A8CDB0", fontStyle: "italic" }}>
           Trusted Professional Guidance.
         </div>
       </div>
@@ -64,11 +66,11 @@ export default function OpengraphImage() {
           alignItems: "center",
           gap: 20,
           fontSize: 22,
-          color: "#9AA3B2",
+          color: "#B8C6BC",
           fontFamily: "sans-serif",
         }}
       >
-        <div style={{ width: 60, height: 2, background: "#C6A66B" }} />
+        <div style={{ width: 60, height: 2, background: "linear-gradient(90deg, #D3EADB, #6E8B6A)" }} />
         {localTitle()}
       </div>
     </div>,

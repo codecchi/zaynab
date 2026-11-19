@@ -99,20 +99,24 @@ export function ContactForm() {
           animate={{ opacity: 1, y: 0 }}
           role="status"
           aria-live="polite"
-          className="border-line border bg-white p-8 sm:p-10"
+          className="glass rounded-[2rem] p-8 sm:p-10"
         >
-          <CircleCheck className="text-gold-deep size-10" strokeWidth={1.4} aria-hidden />
+          <CircleCheck className="text-accent-2 size-10" strokeWidth={1.4} aria-hidden />
           {status === "sent" ? (
             <>
-              <h3 className="text-navy mt-6 font-serif text-3xl">Thank you, your inquiry has been sent.</h3>
-              <p className="text-slate mt-4 leading-relaxed">
+              <h3 className="text-gradient mt-6 pb-1 text-2xl font-bold tracking-tight sm:text-3xl">
+                Thank you, your inquiry has been sent.
+              </h3>
+              <p className="text-muted mt-4 leading-relaxed">
                 We will review your message and respond as soon as possible during business hours.
               </p>
             </>
           ) : (
             <>
-              <h3 className="text-navy mt-6 font-serif text-3xl">Your inquiry is ready to send.</h3>
-              <p className="text-slate mt-4 leading-relaxed">
+              <h3 className="text-gradient mt-6 pb-1 text-2xl font-bold tracking-tight sm:text-3xl">
+                Your inquiry is ready to send.
+              </h3>
+              <p className="text-muted mt-4 leading-relaxed">
                 Online delivery for this form is not connected yet, so nothing has been sent. Choose how you would like
                 to send your message — it has been filled in for you.
               </p>
@@ -123,13 +127,13 @@ export function ContactForm() {
                   </Button>
                 )}
                 {wa && (
-                  <Button href={wa} variant="outline">
+                  <Button href={wa} variant="secondary">
                     <MessageCircle className="size-4" aria-hidden /> Send on WhatsApp
                   </Button>
                 )}
               </div>
               {!mail && !wa && (
-                <p className="border-gold-deep/60 text-slate mt-6 border-l-2 pl-4 text-sm">
+                <p className="border-accent/30 text-muted mt-6 rounded-xl border border-dashed px-4 py-3 text-sm">
                   Email and WhatsApp details have not been configured yet. Once they are added in{" "}
                   <code>site-config.ts</code>, buttons to send the inquiry will appear here.
                 </p>
@@ -139,7 +143,7 @@ export function ContactForm() {
           <button
             type="button"
             onClick={() => setStatus("idle")}
-            className="text-navy mt-8 min-h-11 cursor-pointer text-sm font-semibold underline underline-offset-4"
+            className="text-fg mt-8 min-h-11 cursor-pointer text-sm font-semibold underline underline-offset-4"
           >
             Edit inquiry
           </button>
@@ -149,11 +153,11 @@ export function ContactForm() {
   }
 
   const field =
-    "mt-2 block w-full border border-navy/15 bg-white px-4 py-3.5 text-base text-navy transition-colors duration-300 placeholder:text-slate/60 hover:border-navy/35 focus:border-navy focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-gold-deep";
-  const label = "text-sm font-semibold text-navy";
+    "mt-2 block w-full rounded-2xl border border-line-strong bg-surface/70 px-4 py-3.5 text-base text-fg transition-[border-color,background-color,box-shadow] duration-300 placeholder:text-subtle hover:border-accent/30 focus:border-accent/50 focus:bg-surface focus:shadow-[0_0_0_4px_rgba(141,181,150,0.15)] focus:outline-none";
+  const label = "text-sm font-semibold text-fg";
   const err = (k: keyof Fields) =>
     errors[k] ? (
-      <p id={`${id}-${k}-error`} className="mt-2 flex items-center gap-1.5 text-sm text-[#b42318]">
+      <p id={`${id}-${k}-error`} className="mt-2 flex items-center gap-1.5 text-sm text-[#ff9b8f]">
         <TriangleAlert className="size-3.5 shrink-0" aria-hidden /> {errors[k]}
       </p>
     ) : null;
@@ -164,25 +168,25 @@ export function ContactForm() {
   });
 
   return (
-    <form onSubmit={onSubmit} noValidate className="border-line relative border bg-white p-6 sm:p-10">
+    <form onSubmit={onSubmit} noValidate className="glass relative rounded-[2rem] p-6 sm:p-10">
       <div className="grid gap-6 sm:grid-cols-2">
         <div className="sm:col-span-2">
           <label htmlFor={`${id}-name`} className={label}>
-            Full Name <span className="text-gold-deep">*</span>
+            Full Name <span className="text-highlight">*</span>
           </label>
           <input
             type="text"
             autoComplete="name"
             value={fields.name}
             onChange={set("name")}
-            className={cn(field, errors.name && "border-[#b42318]")}
+            className={cn(field, errors.name && "border-[#ff9b8f]/60")}
             {...aria("name")}
           />
           {err("name")}
         </div>
         <div>
           <label htmlFor={`${id}-email`} className={label}>
-            Email Address <span className="text-gold-deep">*</span>
+            Email Address <span className="text-highlight">*</span>
           </label>
           <input
             type="email"
@@ -190,14 +194,14 @@ export function ContactForm() {
             inputMode="email"
             value={fields.email}
             onChange={set("email")}
-            className={cn(field, errors.email && "border-[#b42318]")}
+            className={cn(field, errors.email && "border-[#ff9b8f]/60")}
             {...aria("email")}
           />
           {err("email")}
         </div>
         <div>
           <label htmlFor={`${id}-phone`} className={label}>
-            Phone Number <span className="text-gold-deep">*</span>
+            Phone Number <span className="text-highlight">*</span>
           </label>
           <input
             type="tel"
@@ -206,45 +210,49 @@ export function ContactForm() {
             placeholder="+92 3XX XXXXXXX"
             value={fields.phone}
             onChange={set("phone")}
-            className={cn(field, errors.phone && "border-[#b42318]")}
+            className={cn(field, errors.phone && "border-[#ff9b8f]/60")}
             {...aria("phone")}
           />
           {err("phone")}
         </div>
         <div className="sm:col-span-2">
           <label htmlFor={`${id}-service`} className={label}>
-            Service Required <span className="text-gold-deep">*</span>
+            Service Required <span className="text-highlight">*</span>
           </label>
           <select
             value={fields.service}
             onChange={set("service")}
             className={cn(
               field,
-              "bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%228%22 fill=%22none%22><path d=%22M1 1l5 5 5-5%22 stroke=%22%23101C2C%22 stroke-width=%221.5%22/></svg>')] cursor-pointer appearance-none bg-[length:12px] bg-[right_1rem_center] bg-no-repeat pr-10",
-              errors.service && "border-[#b42318]",
+              "bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%228%22 fill=%22none%22><path d=%22M1 1l5 5 5-5%22 stroke=%22%23A8CDB0%22 stroke-width=%221.5%22/></svg>')] cursor-pointer appearance-none bg-[length:12px] bg-[right_1rem_center] bg-no-repeat pr-10",
+              errors.service && "border-[#ff9b8f]/60",
             )}
             {...aria("service")}
           >
-            <option value="">Select a service…</option>
+            <option value="" className="bg-surface">
+              Select a service…
+            </option>
             {services.map((s) => (
-              <option key={s.slug} value={s.slug}>
+              <option key={s.slug} value={s.slug} className="bg-surface">
                 {s.title}
               </option>
             ))}
-            <option value="other">Other / Not sure</option>
+            <option value="other" className="bg-surface">
+              Other / Not sure
+            </option>
           </select>
           {err("service")}
         </div>
         <div className="sm:col-span-2">
           <label htmlFor={`${id}-message`} className={label}>
-            Message <span className="text-gold-deep">*</span>
+            Message <span className="text-highlight">*</span>
           </label>
           <textarea
             rows={6}
             value={fields.message}
             onChange={set("message")}
             placeholder="Briefly describe your situation or question."
-            className={cn(field, "resize-y", errors.message && "border-[#b42318]")}
+            className={cn(field, "resize-y", errors.message && "border-[#ff9b8f]/60")}
             {...aria("message")}
           />
           {err("message")}
@@ -259,16 +267,19 @@ export function ContactForm() {
       </div>
 
       {status === "error" && (
-        <p role="alert" className="mt-6 flex gap-3 border border-[#b42318]/30 bg-[#fef3f2] p-4 text-sm text-[#b42318]">
+        <p
+          role="alert"
+          className="mt-6 flex gap-3 rounded-2xl border border-[#ff9b8f]/30 bg-[#ff9b8f]/[0.08] p-4 text-sm text-[#ff9b8f]"
+        >
           <TriangleAlert className="size-4 shrink-0" aria-hidden />
           Your inquiry could not be sent. Please try again, or contact us directly using the details on this page.
         </p>
       )}
 
       <div className="mt-8 flex flex-col-reverse gap-5 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-slate text-xs leading-relaxed">
+        <p className="text-subtle text-xs leading-relaxed">
           Your details are kept confidential and used only to respond to your inquiry. See our{" "}
-          <a href="/privacy-policy" className="hover:text-navy underline underline-offset-2">
+          <a href="/privacy-policy" className="hover:text-fg underline underline-offset-2">
             Privacy Policy
           </a>
           .
@@ -284,8 +295,8 @@ export function ContactForm() {
       </div>
 
       {!endpoint && (
-        <p className="border-line text-slate mt-6 flex gap-3 border-t pt-6 text-xs leading-relaxed">
-          <Info className="text-gold-deep size-4 shrink-0" aria-hidden />
+        <p className="border-line text-subtle mt-6 flex gap-3 border-t pt-6 text-xs leading-relaxed">
+          <Info className="text-accent-2 size-4 shrink-0" aria-hidden />
           This form checks your details and then lets you send your inquiry by email or WhatsApp. It does not store or
           send anything on its own.
         </p>

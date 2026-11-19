@@ -1,72 +1,51 @@
 import { cn } from "@/lib/utils";
 import { Reveal } from "./reveal";
 
-export function Eyebrow({
-  children,
-  tone = "light",
-  className,
-}: {
-  children: React.ReactNode;
-  tone?: "light" | "dark";
-  className?: string;
-}) {
+/** Glass pill label with a pulsing leaf-green dot. */
+export function Eyebrow({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
     <p
       className={cn(
-        "inline-flex items-center gap-3 text-[0.72rem] font-semibold tracking-[0.24em] uppercase",
-        tone === "dark" ? "text-gold" : "text-gold-deep",
+        "border-line-strong text-accent-2 bg-surface/70 inline-flex items-center gap-2.5 rounded-full border px-3.5 py-1.5 text-[0.68rem] font-semibold tracking-[0.18em] uppercase backdrop-blur-md",
         className,
       )}
     >
-      <span aria-hidden className={cn("h-px w-8", tone === "dark" ? "bg-gold" : "bg-gold-deep")} />
+      <span aria-hidden className="bg-highlight animate-pulse-dot size-1.5 rounded-full" />
       {children}
     </p>
   );
+}
+
+/** White-to-mint gradient accent for part of a heading. */
+export function Accent({ children }: { children: React.ReactNode }) {
+  return <span className="text-accent-gradient">{children}</span>;
 }
 
 type Props = {
   eyebrow?: string;
   title: React.ReactNode;
   description?: React.ReactNode;
-  tone?: "light" | "dark";
   align?: "left" | "center";
   as?: "h1" | "h2";
+  id?: string;
   className?: string;
 };
 
-export function SectionHeading({
-  eyebrow,
-  title,
-  description,
-  tone = "light",
-  align = "left",
-  as = "h2",
-  className,
-}: Props) {
+/** Section title: pill eyebrow, gradient headline, muted description. */
+export function SectionHeading({ eyebrow, title, description, align = "left", as = "h2", id, className }: Props) {
   const Heading = as;
+  const center = align === "center";
   return (
-    <Reveal className={cn("max-w-3xl", align === "center" && "mx-auto text-center", className)}>
-      {eyebrow && (
-        <Eyebrow tone={tone} className={cn(align === "center" && "justify-center")}>
-          {eyebrow}
-        </Eyebrow>
-      )}
+    <Reveal className={cn("max-w-3xl", center && "mx-auto flex flex-col items-center text-center", className)}>
+      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
       <Heading
-        className={cn(
-          "mt-5 font-serif text-[2.25rem] leading-[1.08] tracking-[-0.01em] text-balance sm:text-5xl lg:text-[3.4rem]",
-          tone === "dark" ? "text-ivory" : "text-navy",
-        )}
+        id={id}
+        className="font-display text-gradient mt-6 pb-1 text-[2.1rem] leading-[1.06] text-balance sm:text-5xl lg:text-[3.4rem]"
       >
         {title}
       </Heading>
       {description && (
-        <p
-          className={cn(
-            "mt-6 text-[1.05rem] leading-relaxed text-pretty sm:text-lg",
-            tone === "dark" ? "text-slate-light" : "text-slate",
-            align === "center" && "mx-auto max-w-2xl",
-          )}
-        >
+        <p className={cn("text-muted mt-5 text-base leading-relaxed text-pretty sm:text-lg", center && "max-w-2xl")}>
           {description}
         </p>
       )}

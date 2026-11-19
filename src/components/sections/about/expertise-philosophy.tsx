@@ -4,29 +4,35 @@ import { profile } from "@/data/profile";
 import { services } from "@/data/services";
 import { display, visibleStrings } from "@/lib/content";
 import { Container } from "@/components/ui/container";
+import { Aurora, SpotlightGroup } from "@/components/ui/effects";
 import { Icon } from "@/components/ui/icon";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/reveal";
-import { Eyebrow, SectionHeading } from "@/components/ui/section-heading";
+import { Accent, Eyebrow, SectionHeading } from "@/components/ui/section-heading";
 
 /** F — Areas of expertise. */
 export function AboutExpertise() {
   const knowledge = visibleStrings(profile.technicalKnowledge);
   return (
-    <section aria-labelledby="about-expertise-title" className="bg-ivory">
-      <Container className="grid gap-14 py-24 sm:py-28 lg:grid-cols-12 lg:gap-16">
+    <section aria-labelledby="about-expertise-title" className="relative py-24 sm:py-28">
+      <Container className="grid gap-12 lg:grid-cols-12 lg:gap-14">
         <div className="lg:col-span-4">
           <SectionHeading
+            id="about-expertise-title"
             eyebrow="Areas of Expertise"
-            title={<span id="about-expertise-title">Specializations & Knowledge.</span>}
+            title={
+              <>
+                Specializations <Accent>& knowledge.</Accent>
+              </>
+            }
           />
           {knowledge.length > 0 && (
             <Reveal delay={0.1} className="mt-10">
-              <h3 className="text-slate text-[0.7rem] font-semibold tracking-[0.22em] uppercase">
+              <h3 className="text-subtle text-[0.68rem] font-semibold tracking-[0.2em] uppercase">
                 Technical Knowledge
               </h3>
               <ul className="mt-4 flex flex-wrap gap-2">
                 {knowledge.map((k, i) => (
-                  <li key={i} className="border-navy/15 text-navy border bg-white px-3 py-2 text-sm">
+                  <li key={i} className="glass text-fg rounded-full px-4 py-2 text-sm">
                     {k}
                   </li>
                 ))}
@@ -34,28 +40,24 @@ export function AboutExpertise() {
             </Reveal>
           )}
         </div>
-        <RevealGroup as="ul" className="border-line bg-line grid gap-px self-start border sm:grid-cols-2 lg:col-span-8">
-          {services.map((s) => (
-            <RevealItem as="li" key={s.slug} className="bg-white">
-              <Link
-                href={`/services#${s.slug}`}
-                className="group hover:bg-navy flex h-full items-start gap-4 p-6 transition-colors duration-500"
-              >
-                <Icon
-                  name={s.icon}
-                  className="text-gold-deep group-hover:text-gold mt-0.5 size-5 shrink-0 transition-colors"
-                />
-                <span className="text-navy group-hover:text-ivory flex-1 font-serif text-lg leading-snug transition-colors">
-                  {s.title}
-                </span>
-                <ArrowUpRight
-                  className="text-slate group-hover:text-gold size-4 shrink-0 transition-colors"
-                  aria-hidden
-                />
-              </Link>
-            </RevealItem>
-          ))}
-        </RevealGroup>
+        <SpotlightGroup className="lg:col-span-8">
+          <RevealGroup as="ul" className="grid gap-3 sm:grid-cols-2">
+            {services.map((s) => (
+              <RevealItem as="li" key={s.slug} className="glass spotlight group rounded-2xl">
+                <Link href={`/services#${s.slug}`} className="flex h-full items-center gap-4 rounded-2xl p-5">
+                  <span className="border-accent/25 text-accent-2 bg-accent/[0.06] grid size-11 shrink-0 place-items-center rounded-xl border">
+                    <Icon name={s.icon} className="size-5" />
+                  </span>
+                  <span className="text-fg flex-1 text-[0.95rem] leading-snug font-semibold">{s.title}</span>
+                  <ArrowUpRight
+                    className="text-subtle group-hover:text-accent-2 size-4 shrink-0 transition-colors"
+                    aria-hidden
+                  />
+                </Link>
+              </RevealItem>
+            ))}
+          </RevealGroup>
+        </SpotlightGroup>
       </Container>
     </section>
   );
@@ -68,35 +70,37 @@ export function Philosophy() {
   if (!statement && topics.length === 0) return null;
 
   return (
-    <section aria-labelledby="philosophy-title" className="bg-white">
-      <Container className="py-24 sm:py-28">
-        <Reveal className="mx-auto max-w-4xl text-center">
-          <Eyebrow className="justify-center">Professional Philosophy</Eyebrow>
+    <section aria-labelledby="philosophy-title" className="relative py-24 sm:py-28">
+      <Container>
+        <Reveal className="mx-auto flex max-w-4xl flex-col items-center text-center">
+          <Eyebrow>Professional Philosophy</Eyebrow>
           <h2 id="philosophy-title" className="sr-only">
             Professional Philosophy
           </h2>
           {statement && (
-            <blockquote className="text-navy mt-8 font-serif text-3xl leading-snug text-balance sm:text-[2.6rem]">
-              <span aria-hidden className="text-gold">
+            <blockquote className="font-display text-gradient mt-8 pb-1 text-3xl leading-[1.2] font-semibold text-balance sm:text-[2.6rem]">
+              <span aria-hidden className="text-highlight">
                 &ldquo;
               </span>
               {statement}
-              <span aria-hidden className="text-gold">
+              <span aria-hidden className="text-highlight">
                 &rdquo;
               </span>
             </blockquote>
           )}
         </Reveal>
         {topics.length > 0 && (
-          <RevealGroup as="ul" className="border-line bg-line mt-16 grid gap-px border sm:grid-cols-2 lg:grid-cols-5">
-            {topics.map((t, i) => (
-              <RevealItem as="li" key={t.topic} className="bg-white p-6 sm:p-7">
-                <span className="text-gold-deep font-serif text-lg">{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="text-navy mt-4 font-serif text-xl leading-snug">{t.topic}</h3>
-                <p className="text-slate mt-3 text-sm leading-relaxed">{t.text}</p>
-              </RevealItem>
-            ))}
-          </RevealGroup>
+          <SpotlightGroup className="mt-14">
+            <RevealGroup as="ul" className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+              {topics.map((t, i) => (
+                <RevealItem as="li" key={t.topic} className="glass spotlight rounded-3xl p-6">
+                  <span className="text-accent-gradient text-sm font-bold">{String(i + 1).padStart(2, "0")}</span>
+                  <h3 className="text-fg mt-4 text-base font-semibold tracking-tight">{t.topic}</h3>
+                  <p className="text-muted mt-2 text-sm leading-relaxed">{t.text}</p>
+                </RevealItem>
+              ))}
+            </RevealGroup>
+          </SpotlightGroup>
         )}
       </Container>
     </section>
@@ -112,20 +116,26 @@ export function VisionMission() {
   if (blocks.length === 0) return null;
 
   return (
-    <section aria-label="Vision and mission" className="on-dark bg-navy text-ivory relative overflow-hidden">
-      <div className="hairlines-dark pointer-events-none absolute inset-0" />
-      <Container className="relative grid gap-px py-24 sm:py-28 md:grid-cols-2">
+    <section aria-label="Vision and mission" className="relative py-12 sm:py-16">
+      <Container className="grid gap-3 md:grid-cols-2">
         {blocks.map((b, i) => (
           <Reveal
             key={b.label}
             delay={i * 0.1}
-            className={`py-6 md:py-0 ${i === 1 ? "border-t border-white/10 md:border-t-0 md:border-l md:pl-14" : "md:pr-14"}`}
+            className="beam theme-deep bg-bg relative overflow-hidden rounded-[2rem] p-8 sm:p-12"
           >
-            <span className="border-gold/40 text-gold grid size-14 place-items-center border">
-              <Icon name={b.icon} className="size-6" />
-            </span>
-            <h2 className="text-gold mt-8 text-[0.72rem] font-semibold tracking-[0.24em] uppercase">Our {b.label}</h2>
-            <p className="mt-5 font-serif text-[1.9rem] leading-snug text-pretty sm:text-4xl">{b.text}</p>
+            <Aurora intensity="soft" />
+            <div className="relative">
+              <span className="border-accent/25 text-accent-2 bg-accent/[0.06] grid size-14 place-items-center rounded-2xl border">
+                <Icon name={b.icon} className="size-6" />
+              </span>
+              <h2 className="text-accent-2 mt-8 text-[0.7rem] font-semibold tracking-[0.22em] uppercase">
+                Our {b.label}
+              </h2>
+              <p className="text-gradient mt-4 pb-1 text-2xl leading-snug font-semibold text-pretty sm:text-3xl">
+                {b.text}
+              </p>
+            </div>
           </Reveal>
         ))}
       </Container>
