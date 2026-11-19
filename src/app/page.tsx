@@ -1,21 +1,37 @@
-import { Nav } from "@/components/nav";
-import { Hero } from "@/components/hero";
-import { Marquee } from "@/components/marquee";
-import { Work } from "@/components/work";
-import { Process } from "@/components/process";
-import { Contact } from "@/components/contact";
+import type { Metadata } from "next";
+import { siteConfig } from "@/data/site-config";
+import { localTitle, pageMetadata } from "@/lib/seo";
+import { Hero } from "@/components/sections/home/hero";
+import { Highlights } from "@/components/sections/home/highlights";
+import { Introduction } from "@/components/sections/home/introduction";
+import { Expertise } from "@/components/sections/home/expertise";
+import { WhyChoose } from "@/components/sections/home/why-choose";
+import { Journey } from "@/components/sections/home/journey";
+import { Work } from "@/components/sections/home/work";
+import { Testimonials } from "@/components/sections/home/testimonials";
+import { CtaBand } from "@/components/sections/cta-band";
 
-export default function Home() {
+export const metadata: Metadata = {
+  ...pageMetadata({
+    title: `${localTitle()} — Tax, Compliance & Business Advisory`,
+    description: `${siteConfig.brand.description} FBR tax return filing, NTN and SECP registration, sales tax, bookkeeping and tax advisory.`,
+    path: "/",
+  }),
+  title: { absolute: `${localTitle()} — Tax, Compliance & Business Advisory | ${siteConfig.brand.name}` },
+};
+
+export default function HomePage() {
   return (
     <>
-      <Nav />
-      <main id="main">
-        <Hero />
-        <Marquee />
-        <Work />
-        <Process />
-      </main>
-      <Contact />
+      <Hero />
+      <Highlights />
+      <Introduction />
+      <Expertise />
+      <WhyChoose />
+      <Journey />
+      <Work />
+      <Testimonials />
+      <CtaBand />
     </>
   );
 }

@@ -1,78 +1,90 @@
 @import "tailwindcss";
 @import "lenis/dist/lenis.css";
 
-/* Dark mode is driven by next-themes adding `.dark` to <html> */
-@custom-variant dark (&:where(.dark, .dark *));
-
-/* Design tokens — from design-system/zaynab/MASTER.md (UI UX Pro Max) */
+/*
+ * Design tokens — Premium Tax Consultancy
+ * Navy is the primary brand colour; champagne gold is a restrained accent.
+ * Gold (#C6A66B) is only used for TEXT on navy (7.4:1). On light backgrounds,
+ * text uses gold-deep (#8A6A35, 4.6:1); plain gold there is decorative only.
+ */
 :root {
-  --background: #fafafa;
-  --foreground: #09090b;
-  --card: #ffffff;
-  --card-foreground: #09090b;
-  --primary: #18181b;
-  --on-primary: #ffffff;
-  --secondary: #3f3f46;
-  --accent: #2563eb;
-  --on-accent: #ffffff;
-  --muted: #e8ecf0;
-  --muted-foreground: #475569;
-  --border: #e4e4e7;
-  --ring: #18181b;
-}
-
-.dark {
-  --background: #09090b;
-  --foreground: #fafafa;
-  --card: #111113;
-  --card-foreground: #fafafa;
-  --primary: #fafafa;
-  --on-primary: #09090b;
-  --secondary: #a1a1aa;
-  --accent: #60a5fa;
-  --on-accent: #09090b;
-  --muted: #1c1c1f;
-  --muted-foreground: #a1a1aa;
-  --border: #27272a;
-  --ring: #fafafa;
+  --navy: #101c2c;
+  --midnight: #172a40;
+  --gold: #c6a66b;
+  --gold-deep: #8a6a35;
+  --gold-soft: #e9dcc2;
+  --ivory: #f7f6f2;
+  --white: #ffffff;
+  --slate: #5f6a7c; /* body-muted on light (darkened from #687386 for 4.5:1 contrast) */
+  --slate-light: #9aa3b2; /* muted text on navy */
+  --line: #e7e7e3;
+  --ink: #101c2c;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-primary: var(--primary);
-  --color-on-primary: var(--on-primary);
-  --color-secondary: var(--secondary);
-  --color-accent: var(--accent);
-  --color-on-accent: var(--on-accent);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-border: var(--border);
-  --color-ring: var(--ring);
-  --font-sans: var(--font-archivo);
-  --font-display: var(--font-space-grotesk);
+  --color-navy: var(--navy);
+  --color-midnight: var(--midnight);
+  --color-gold: var(--gold);
+  --color-gold-deep: var(--gold-deep);
+  --color-gold-soft: var(--gold-soft);
+  --color-ivory: var(--ivory);
+  --color-white: var(--white);
+  --color-slate: var(--slate);
+  --color-slate-light: var(--slate-light);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+
+  --font-serif: var(--font-dm-serif), "Times New Roman", serif;
+  --font-sans: var(--font-manrope), system-ui, sans-serif;
+
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 html {
-  scroll-behavior: auto;
+  scroll-padding-top: 6rem;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-archivo), system-ui, sans-serif;
+  background: var(--ivory);
+  color: var(--ink);
+  font-family: var(--font-manrope), system-ui, sans-serif;
+  font-feature-settings: "ss01", "cv11";
+  overflow-x: clip;
 }
 
 ::selection {
-  background: var(--accent);
-  color: var(--on-accent);
+  background: var(--gold);
+  color: var(--navy);
 }
 
 :focus-visible {
-  outline: 3px solid var(--accent);
+  outline: 2px solid var(--gold-deep);
   outline-offset: 3px;
+}
+
+.on-dark :focus-visible,
+.on-dark:focus-visible {
+  outline-color: var(--gold);
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@utility text-pretty {
+  text-wrap: pretty;
+}
+
+/* Editorial hairline grid used behind hero and dark sections */
+@utility hairlines {
+  background-image: linear-gradient(to right, color-mix(in oklab, var(--navy) 6%, transparent) 1px, transparent 1px);
+  background-size: calc(100% / 6) 100%;
+}
+
+@utility hairlines-dark {
+  background-image: linear-gradient(to right, color-mix(in oklab, white 5%, transparent) 1px, transparent 1px);
+  background-size: calc(100% / 6) 100%;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -82,5 +94,6 @@ body {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
